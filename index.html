@@ -14,44 +14,23 @@ html, body{
   font-family:Arial, sans-serif;
 }
 
-/* Full screen centered background */
 body{
   background-image:url("background.png");
-  background-size:contain;          /* shows full image, no crop */
+  background-size:contain;
   background-position:center center;
   background-repeat:no-repeat;
 }
 
-/* Counter */
 #days{
   position:absolute;
   left:50%;
-  top:49%;                         /* vertical placement in center box */
+  top:49%;
   transform:translate(-50%, -50%);
-  
+  font-size:min(10vw, 190px);
   font-weight:bold;
   color:#0070C0;
   line-height:1;
   white-space:nowrap;
-
-  /* Responsive sizing for monitor + TV */
-  font-size:min(10vw, 190px);
-}
-
-/* Large TVs / 4K displays */
-@media (min-width:1920px){
-  #days{
-    font-size:min(9vw, 260px);
-    top:49%;
-  }
-}
-
-/* Smaller monitors / laptops */
-@media (max-width:1366px){
-  #days{
-    font-size:min(11vw, 165px);
-    top:49%;
-  }
 }
 </style>
 </head>
@@ -61,23 +40,17 @@ body{
 <div id="days">0</div>
 
 <script>
-const startYear = 2025;
-const startMonth = 10; // November = 10 because JavaScript months start at 0
-const startDay = 13;
-
 function updateCounter(){
-  const today = new Date();
+  var startDate = new Date(2025, 10, 13); // Nov 13, 2025
+  var today = new Date();
 
-  const startUTC = Date.UTC(startYear, startMonth, startDay);
-  const todayUTC = Date.UTC(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate()
-  );
+  startDate.setHours(0,0,0,0);
+  today.setHours(0,0,0,0);
 
-  const days = Math.floor((todayUTC - startUTC) / (1000 * 60 * 60 * 24));
+  var oneDay = 24 * 60 * 60 * 1000;
+  var days = Math.round((today.getTime() - startDate.getTime()) / oneDay);
 
-  document.getElementById("days").textContent = days;
+  document.getElementById("days").innerHTML = days;
 }
 
 updateCounter();
