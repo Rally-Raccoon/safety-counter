@@ -7,33 +7,21 @@
 <style>
 body{
   margin:0;
-  background:white;
   height:100vh;
+  background-image:url("background.png");
+  background-size: contain;
+  background-position:center;
+  background-repeat:no-repeat;
+  font-family:Arial, sans-serif;
   overflow:hidden;
-}
-
-#board{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:100vw;
-  height:auto;
-}
-
-#bg{
-  width:100%;
-  height:auto;
-  display:block;
 }
 
 #days{
   position:absolute;
   left:50%;
-  top:47%;
-  transform:translate(-50%,-50%);
-  font-size:12vw;
-  font-family:Arial, sans-serif;
+  top:50%;
+  transform:translate(-50%, -50%);
+  font-size:190px;
   font-weight:bold;
   color:#0070C0;
   line-height:1;
@@ -43,10 +31,7 @@ body{
 
 <body>
 
-<div id="board">
-  <img src="background.png" id="bg">
-  <div id="days">0</div>
-</div>
+<div id="days">0</div>
 
 <script>
 const startDate = new Date("2025-11-13T00:00:00");
@@ -54,11 +39,12 @@ const startDate = new Date("2025-11-13T00:00:00");
 function updateCounter(){
   const today = new Date();
   const start = new Date(startDate);
-
-  today.setHours(0,0,0,0);
   start.setHours(0,0,0,0);
+  today.setHours(0,0,0,0);
 
-  const days = Math.floor((today - start) / (1000*60*60*24));
+  const diff = today - start;
+  const days = Math.floor(diff / (1000*60*60*24));
+
   document.getElementById("days").innerText = days;
 }
 
