@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="3600">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background-image:url("background.png");
+  background-size: contain;
+  background-position:center;
+  background-repeat:no-repeat;
+  font-family:Arial, sans-serif;
+  overflow:hidden;
+}
+
+#days{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  font-size:190px;
+  font-weight:bold;
+  color:#0070C0;
+  line-height:1;
+}
+</style>
+</head>
+
+<body>
+
+<div id="days">0</div>
+
+<script>
+const startDate = new Date("2025-11-13T00:00:00");
+
+function updateCounter(){
+  const today = new Date();
+  const start = new Date(startDate);
+  start.setHours(0,0,0,0);
+  today.setHours(0,0,0,0);
+
+  const diff = today - start;
+  const days = Math.floor(diff / (1000*60*60*24));
+
+  document.getElementById("days").innerText = days;
+}
+
+updateCounter();
+setInterval(updateCounter, 60000);
+</script>
+
+</body>
+</html>
